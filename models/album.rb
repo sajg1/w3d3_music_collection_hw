@@ -65,4 +65,12 @@ attr_accessor :title, :genre
     sql = "DELETE FROM albums"
     SqlRunner.run(sql)
   end
+
+#READ
+  def self.find_by_id(id)
+    sql = "SELECT * FROM albums WHERE id = $1"
+    values = [id]
+    result = SqlRunner.run(sql, values)
+    return result[0]
+  end
 end
