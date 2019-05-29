@@ -27,6 +27,22 @@ attr_accessor :title, :genre
     @id = album[0]['id'].to_i
   end
 
+#UPDATE
+  def update()
+    sql = "UPDATE albums SET
+    (
+      title, genre, artist_id
+    )
+    =
+    (
+      $1, $2, $3
+    ) WHERE id = $4"
+    values = [@title, @genre, @artist_id, @id]
+    result = SqlRunner.run(sql, values)
+
+  end
+
+#READ
   def artist()
     sql = "SELECT * FROM artists WHERE id = $1"
     values = [@artist_id]
